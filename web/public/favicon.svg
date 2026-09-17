@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <circle cx="24" cy="24" r="23" fill="#16305f" stroke="#cda23a" stroke-width="1.5" />
+  <circle cx="24" cy="24" r="19" fill="none" stroke="#cda23a" stroke-width="0.75" opacity="0.6" />
+  <text x="24" y="29" text-anchor="middle" font-size="15" font-weight="700" fill="#f5e9c3" font-family="sans-serif">两江</text>
+</svg>
