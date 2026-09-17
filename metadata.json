@@ -1,0 +1,6 @@
+{
+  "name": "西附两江智能教育助手",
+  "description": "西南大学附属中学两江中学面向高中教师的校园全场景智能工作平台，涵盖AI助手、Skill中心、多模态AI创作中心与管理员后台治理。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
