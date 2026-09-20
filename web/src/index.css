@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50: #eef3fc;
+  --color-brand-100: #d7e4f8;
+  --color-brand-200: #aecaf0;
+  --color-brand-300: #7aa8e4;
+  --color-brand-400: #4a7dd1;
+  --color-brand-500: #2b56b3;
+  --color-brand-600: #1e40a6;
+  --color-brand-700: #17337f;
+  --color-brand-800: #122862;
+  --color-brand-900: #0c1c46;
+  --color-brand-950: #071230;
+
+  --color-gold-50: #fbf6e9;
+  --color-gold-100: #f5e9c3;
+  --color-gold-200: #ecd68e;
+  --color-gold-300: #dfbd5c;
+  --color-gold-400: #cda23a;
+  --color-gold-500: #b8862a;
+  --color-gold-600: #97691f;
+  --color-gold-700: #75501b;
+
+  --font-sans: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-serif-sc: "Noto Serif SC", "Songti SC", "SimSun", serif;
+  --font-calligraphy: "Ma Shan Zheng", "Noto Serif SC", serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: #f4f6fb;
+  color: #17337f;
+  -webkit-font-smoothing: antialiased;
+}
+
+html.dark body {
+  background: #0b1526;
+  color: #e6ecfa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(28, 61, 125, 0.25);
+  border-radius: 999px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(180, 200, 240, 0.25);
+}
+
+@keyframes blink-caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.typing-caret::after {
+  content: "▍";
+  margin-left: 2px;
+  animation: blink-caret 1s step-end infinite;
+  color: var(--color-brand-500);
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 1.1s ease-in-out infinite;
+}
