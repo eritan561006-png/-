@@ -9,6 +9,7 @@ import {
   GraduationCap,
   ChevronRight,
   ExternalLink,
+  ClipboardCheck,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -50,6 +51,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       name: "AI 创作中心",
       icon: Palette,
       desc: "图片/PPT/视频/数字人/3D",
+    },
+    {
+      id: "grading",
+      name: "智能作业批改",
+      icon: ClipboardCheck,
+      desc: "AI 建议分与评语，教师复核",
     },
     {
       id: "favorites",

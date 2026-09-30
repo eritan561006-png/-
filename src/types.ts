@@ -159,3 +159,49 @@ export interface AIToolConfig {
   type: "question_generator" | "exam_review" | "difficulty_estimator" | "lesson_designer" | "student_diagnostic";
   icon: string;
 }
+
+// ---------- Homework grading ----------
+export interface HomeworkQuestion {
+  id: string;
+  index: number;
+  type: "选择题" | "填空题" | "解答题";
+  prompt: string;
+  maxScore: number;
+  referenceAnswer: string;
+}
+
+export interface HomeworkAssignment {
+  id: string;
+  title: string;
+  subject: string;
+  className: string;
+  dueAt: string;
+  totalStudents: number;
+  questions: HomeworkQuestion[];
+}
+
+export interface QuestionGrade {
+  questionId: string;
+  studentAnswer: string;
+  aiScore: number;
+  aiComment: string;
+  errorTag?: string;
+  score: number; // teacher-confirmed score, starts as aiScore
+  comment: string; // teacher-edited comment, starts as aiComment
+}
+
+export type SubmissionStatus = "ai_grading" | "pending_review" | "confirmed";
+
+export interface HomeworkSubmission {
+  id: string;
+  assignmentId: string;
+  studentName: string;
+  studentNo: string;
+  submittedAt: string;
+  source: "拍照上传" | "在线提交";
+  status: SubmissionStatus;
+  aiConfidence: number; // 0-1
+  grades: QuestionGrade[];
+  aiOverallComment: string;
+  overallComment: string;
+}
