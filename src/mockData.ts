@@ -7,6 +7,8 @@ import {
   QuickCommand,
   TeachingResourceItem,
   ResourceFolder,
+  LearningClassProfile,
+  PracticeSuggestion,
 } from "./types";
 
 export const INITIAL_USERS: User[] = [
@@ -801,3 +803,86 @@ export const TEACHER_GUIDE_SECTIONS = [
     ],
   },
 ];
+
+// ================= 学情分析（模拟数据） =================
+const MATH_KNOWLEDGE_POINTS = [
+  "函数单调性与导数",
+  "三角恒等变换",
+  "数列求和",
+  "空间向量与立体几何",
+  "圆锥曲线综合",
+  "概率与统计",
+  "基本不等式",
+];
+
+const MATH_EXAMS = ["9月周测", "10月月考", "期中考试", "11月月考", "12月联考", "期末模拟"];
+
+export const LEARNING_CLASSES: LearningClassProfile[] = [
+  {
+    id: "g2-3",
+    name: "高二(3)班",
+    grade: "高二",
+    subject: "数学",
+    fullScore: 150,
+    exams: MATH_EXAMS,
+    classAvg: [101.4, 104.2, 99.8, 106.5, 108.1, 111.3],
+    gradeAvg: [98.6, 100.1, 98.9, 101.7, 102.4, 104.0],
+    knowledgePoints: [
+      { name: MATH_KNOWLEDGE_POINTS[0], classMastery: 71, gradeMastery: 68 },
+      { name: MATH_KNOWLEDGE_POINTS[1], classMastery: 83, gradeMastery: 79 },
+      { name: MATH_KNOWLEDGE_POINTS[2], classMastery: 64, gradeMastery: 66 },
+      { name: MATH_KNOWLEDGE_POINTS[3], classMastery: 78, gradeMastery: 74 },
+      { name: MATH_KNOWLEDGE_POINTS[4], classMastery: 52, gradeMastery: 57 },
+      { name: MATH_KNOWLEDGE_POINTS[5], classMastery: 86, gradeMastery: 82 },
+      { name: MATH_KNOWLEDGE_POINTS[6], classMastery: 69, gradeMastery: 71 },
+    ],
+    students: [
+      { id: "s301", name: "陈思远", studentNo: "20240301", scores: [128, 131, 125, 134, 136, 139], mastery: [90, 94, 85, 92, 76, 95, 88] },
+      { id: "s302", name: "李欣怡", studentNo: "20240302", scores: [112, 115, 108, 118, 121, 124], mastery: [78, 88, 70, 84, 58, 90, 74] },
+      { id: "s303", name: "王浩然", studentNo: "20240303", scores: [96, 99, 92, 97, 95, 98], mastery: [62, 80, 55, 70, 41, 84, 60] },
+      { id: "s304", name: "刘雨桐", studentNo: "20240304", scores: [105, 104, 101, 110, 113, 117], mastery: [74, 85, 66, 80, 50, 88, 72] },
+      { id: "s305", name: "张子轩", studentNo: "20240305", scores: [88, 90, 83, 86, 84, 82], mastery: [52, 70, 45, 63, 32, 76, 51] },
+      { id: "s306", name: "赵一诺", studentNo: "20240306", scores: [118, 122, 116, 123, 125, 127], mastery: [84, 90, 76, 86, 64, 92, 80] },
+      { id: "s307", name: "周明哲", studentNo: "20240307", scores: [79, 84, 80, 89, 93, 98], mastery: [58, 76, 51, 68, 40, 80, 57] },
+      { id: "s308", name: "吴佳琪", studentNo: "20240308", scores: [102, 100, 97, 99, 101, 100], mastery: [66, 82, 60, 75, 47, 86, 63] },
+    ],
+  },
+  {
+    id: "g2-7",
+    name: "高二(7)班",
+    grade: "高二",
+    subject: "数学",
+    fullScore: 150,
+    exams: MATH_EXAMS,
+    classAvg: [96.2, 97.5, 97.9, 99.4, 100.2, 101.6],
+    gradeAvg: [98.6, 100.1, 98.9, 101.7, 102.4, 104.0],
+    knowledgePoints: [
+      { name: MATH_KNOWLEDGE_POINTS[0], classMastery: 63, gradeMastery: 68 },
+      { name: MATH_KNOWLEDGE_POINTS[1], classMastery: 77, gradeMastery: 79 },
+      { name: MATH_KNOWLEDGE_POINTS[2], classMastery: 70, gradeMastery: 66 },
+      { name: MATH_KNOWLEDGE_POINTS[3], classMastery: 69, gradeMastery: 74 },
+      { name: MATH_KNOWLEDGE_POINTS[4], classMastery: 55, gradeMastery: 57 },
+      { name: MATH_KNOWLEDGE_POINTS[5], classMastery: 80, gradeMastery: 82 },
+      { name: MATH_KNOWLEDGE_POINTS[6], classMastery: 72, gradeMastery: 71 },
+    ],
+    students: [
+      { id: "s701", name: "黄梓涵", studentNo: "20240701", scores: [115, 117, 119, 120, 122, 121], mastery: [80, 88, 84, 82, 68, 90, 85] },
+      { id: "s702", name: "林俊杰", studentNo: "20240702", scores: [92, 94, 96, 95, 97, 99], mastery: [58, 75, 71, 64, 50, 78, 70] },
+      { id: "s703", name: "何雨萱", studentNo: "20240703", scores: [99, 97, 101, 104, 103, 106], mastery: [65, 79, 74, 72, 56, 82, 75] },
+      { id: "s704", name: "郭子豪", studentNo: "20240704", scores: [81, 85, 83, 84, 86, 87], mastery: [48, 66, 60, 55, 38, 70, 62] },
+      { id: "s705", name: "马诗琪", studentNo: "20240705", scores: [107, 106, 108, 111, 112, 114], mastery: [72, 84, 78, 76, 62, 86, 78] },
+      { id: "s706", name: "罗天宇", studentNo: "20240706", scores: [88, 86, 84, 82, 81, 79], mastery: [55, 70, 64, 58, 44, 74, 63] },
+    ],
+  },
+];
+
+// 按知识点给出的跟进练习推荐
+export const PRACTICE_LIBRARY: Record<string, PracticeSuggestion> = {
+  [MATH_KNOWLEDGE_POINTS[0]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[0], title: "导数与单调性：含参讨论专项", questionCount: 8, difficulty: "变式提升", minutes: 35, focus: "分类讨论的临界点确定与导函数零点比较" },
+  [MATH_KNOWLEDGE_POINTS[1]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[1], title: "三角恒等变换：角的配凑训练", questionCount: 10, difficulty: "基础巩固", minutes: 25, focus: "拆角、配角与辅助角公式的规范使用" },
+  [MATH_KNOWLEDGE_POINTS[2]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[2], title: "数列求和：错位相减与裂项相消", questionCount: 8, difficulty: "变式提升", minutes: 30, focus: "错位相减的项数对齐与裂项后的剩余项识别" },
+  [MATH_KNOWLEDGE_POINTS[3]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[3], title: "空间向量：二面角与线面角", questionCount: 6, difficulty: "基础巩固", minutes: 30, focus: "建系规范与法向量求解的计算准确性" },
+  [MATH_KNOWLEDGE_POINTS[4]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[4], title: "圆锥曲线：联立与韦达定理综合", questionCount: 6, difficulty: "综合拔高", minutes: 45, focus: "设而不求、定点定值问题的运算路径选择" },
+  [MATH_KNOWLEDGE_POINTS[5]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[5], title: "概率统计：分布列与期望", questionCount: 8, difficulty: "基础巩固", minutes: 25, focus: "随机变量取值的完整列举与概率和校验" },
+  [MATH_KNOWLEDGE_POINTS[6]]: { knowledgePoint: MATH_KNOWLEDGE_POINTS[6], title: "基本不等式：最值与取等条件", questionCount: 10, difficulty: "变式提升", minutes: 25, focus: "“一正二定三相等”的检验与常数代换技巧" },
+};

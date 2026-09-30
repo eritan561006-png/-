@@ -31,6 +31,7 @@ import { AdminView } from "./components/pages/AdminView";
 import { FavoritesView } from "./components/pages/FavoritesView";
 import { VisualizationView } from "./components/pages/VisualizationView";
 import { GuideView } from "./components/pages/GuideView";
+import { LearningAnalyticsView } from "./components/pages/LearningAnalyticsView";
 import { MultimodalPreviewModal } from "./components/modals/MultimodalPreviewModal";
 import { QuickCommandModal } from "./components/modals/QuickCommandModal";
 import { AIToolModal } from "./components/modals/AIToolModal";
@@ -347,6 +348,17 @@ export const App: React.FC = () => {
           {/* Visualization / Teaching Research Data Dashboard */}
           {currentView === "visualization" && (
             <VisualizationView currentUser={currentUser} />
+          )}
+
+          {/* Class & Student Learning Analytics */}
+          {currentView === "analytics" && (
+            <LearningAnalyticsView
+              currentUser={currentUser}
+              onSendToAssistant={(prompt: string) => {
+                setAssistantParams({ prompt });
+                setCurrentView("assistant");
+              }}
+            />
           )}
 
           {/* Guide / Manual and Prompt Dictionary View */}

@@ -9,6 +9,7 @@ import {
   GraduationCap,
   ChevronRight,
   ExternalLink,
+  ChartLine,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -62,6 +63,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       name: "教研数据可视化",
       icon: LayoutDashboard,
       desc: "全校AI备课大屏与考点热力",
+    },
+    {
+      id: "analytics",
+      name: "学情分析",
+      icon: ChartLine,
+      desc: "成绩走势、薄弱点与跟进练习",
     },
     {
       id: "guide",
