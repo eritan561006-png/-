@@ -31,6 +31,7 @@ import { AdminView } from "./components/pages/AdminView";
 import { FavoritesView } from "./components/pages/FavoritesView";
 import { VisualizationView } from "./components/pages/VisualizationView";
 import { GuideView } from "./components/pages/GuideView";
+import { GradingView } from "./components/pages/GradingView";
 import { MultimodalPreviewModal } from "./components/modals/MultimodalPreviewModal";
 import { QuickCommandModal } from "./components/modals/QuickCommandModal";
 import { AIToolModal } from "./components/modals/AIToolModal";
@@ -322,6 +323,9 @@ export const App: React.FC = () => {
               onSaveToFavorites={handleSaveResource}
             />
           )}
+
+          {/* Homework Grading View */}
+          {currentView === "grading" && <GradingView currentUser={currentUser} />}
 
           {/* Favorites / Teaching Resources View */}
           {currentView === "favorites" && (

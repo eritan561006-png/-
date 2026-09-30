@@ -7,6 +7,9 @@ import {
   QuickCommand,
   TeachingResourceItem,
   ResourceFolder,
+  HomeworkAssignment,
+  HomeworkSubmission,
+  QuestionGrade,
 } from "./types";
 
 export const INITIAL_USERS: User[] = [
@@ -800,4 +803,227 @@ export const TEACHER_GUIDE_SECTIONS = [
       },
     ],
   },
+];
+
+// ---------- Homework grading (mock) ----------
+
+export const HOMEWORK_ASSIGNMENTS: HomeworkAssignment[] = [
+  {
+    id: "hw-math-01",
+    title: "函数的单调性与最值 · 课后作业",
+    subject: "数学",
+    className: "高一(3)班",
+    dueAt: "2026-09-29 22:00",
+    totalStudents: 45,
+    questions: [
+      {
+        id: "q1",
+        index: 1,
+        type: "选择题",
+        prompt: "函数 f(x) = -x² + 2x 在下列哪个区间上单调递增？ A.(-∞,1]  B.[1,+∞)  C.(-∞,2]  D.[0,+∞)",
+        maxScore: 5,
+        referenceAnswer: "A",
+      },
+      {
+        id: "q2",
+        index: 2,
+        type: "填空题",
+        prompt: "函数 f(x) = x + 4/x (x>0) 的最小值为 ____，此时 x = ____。",
+        maxScore: 10,
+        referenceAnswer: "最小值 4，x = 2（均值不等式，当且仅当 x = 4/x）",
+      },
+      {
+        id: "q3",
+        index: 3,
+        type: "解答题",
+        prompt: "用定义证明：函数 f(x) = 2x + 1/x 在 (0, √2/2) 上单调递减。",
+        maxScore: 15,
+        referenceAnswer:
+          "任取 0<x₁<x₂<√2/2，f(x₁)-f(x₂) = (x₁-x₂)(2 - 1/(x₁x₂))。因 x₁-x₂<0，x₁x₂<1/2 ⇒ 2-1/(x₁x₂)<0，故 f(x₁)-f(x₂)>0，得证。",
+      },
+      {
+        id: "q4",
+        index: 4,
+        type: "解答题",
+        prompt: "已知 f(x) = x² - 2ax + 3，求 f(x) 在 [0, 2] 上的最小值 g(a)。",
+        maxScore: 20,
+        referenceAnswer:
+          "对称轴 x=a。a≤0 时 g(a)=f(0)=3；0<a<2 时 g(a)=f(a)=3-a²；a≥2 时 g(a)=f(2)=7-4a。",
+      },
+    ],
+  },
+  {
+    id: "hw-phys-01",
+    title: "匀变速直线运动 · 周末练习",
+    subject: "物理",
+    className: "高一(3)班",
+    dueAt: "2026-09-28 20:00",
+    totalStudents: 45,
+    questions: [
+      {
+        id: "p1",
+        index: 1,
+        type: "解答题",
+        prompt: "一辆汽车以 10 m/s 的初速度、2 m/s² 的加速度匀减速刹车，求 6 s 内的位移。",
+        maxScore: 20,
+        referenceAnswer: "刹车时间 t=5 s < 6 s，x = v₀²/(2a) = 25 m。",
+      },
+    ],
+  },
+];
+
+const g = (
+  questionId: string,
+  studentAnswer: string,
+  aiScore: number,
+  aiComment: string,
+  errorTag?: string
+): QuestionGrade => ({ questionId, studentAnswer, aiScore, aiComment, errorTag, score: aiScore, comment: aiComment });
+
+export const HOMEWORK_SUBMISSIONS: HomeworkSubmission[] = [
+  {
+    id: "sub-01",
+    assignmentId: "hw-math-01",
+    studentName: "李思远",
+    studentNo: "20260301",
+    submittedAt: "2026-09-29 19:42",
+    source: "拍照上传",
+    status: "pending_review",
+    aiConfidence: 0.93,
+    grades: [
+      g("q1", "A", 5, "正确。能结合二次函数开口方向与对称轴判断单调区间。"),
+      g("q2", "最小值 4，x = 2", 10, "正确，均值不等式使用规范，并写出取等条件。"),
+      g(
+        "q3",
+        "设 x₁<x₂，f(x₁)-f(x₂) = 2(x₁-x₂) + (x₂-x₁)/(x₁x₂) = (x₁-x₂)(2-1/(x₁x₂))，因为 x₁x₂<1/2，所以 f(x₁)>f(x₂)。",
+        12,
+        "作差变形正确，但未写明 x₁、x₂ 的取值范围 0<x₁<x₂<√2/2，且未说明 x₁-x₂<0 的符号判断，扣 3 分。",
+        "定义证明步骤不完整"
+      ),
+      g(
+        "q4",
+        "对称轴 x=a，当 a≤0 时最小值 3；当 0<a<2 时最小值 3-a²；当 a≥2 时最小值 7-4a。",
+        20,
+        "分类讨论完整、结果正确，书写清晰。"
+      ),
+    ],
+    aiOverallComment: "整体掌握扎实，分类讨论思想运用熟练。定义法证明需注意书写“任取—作差—变形—定号—结论”五步完整。",
+    overallComment: "整体掌握扎实，分类讨论思想运用熟练。定义法证明需注意书写“任取—作差—变形—定号—结论”五步完整。",
+  },
+  {
+    id: "sub-02",
+    assignmentId: "hw-math-01",
+    studentName: "王雨涵",
+    studentNo: "20260302",
+    submittedAt: "2026-09-29 20:15",
+    source: "在线提交",
+    status: "pending_review",
+    aiConfidence: 0.71,
+    grades: [
+      g("q1", "B", 0, "错误。f(x) 开口向下，在对称轴 x=1 左侧递增，应选 A。", "二次函数单调性判断"),
+      g("q2", "最小值 4", 6, "最小值正确，但漏填取等时 x 的值，扣 4 分。", "取等条件遗漏"),
+      g(
+        "q3",
+        "f'(x) = 2 - 1/x²，当 0<x<√2/2 时 f'(x)<0，所以单调递减。",
+        6,
+        "题目要求用定义证明，学生使用了导数法，方法不符合题意。结论正确，酌情给 6 分，建议教师复核。",
+        "未按要求方法作答"
+      ),
+      g(
+        "q4",
+        "对称轴 x=a，当 0<a<2 时最小值 3-a²。",
+        8,
+        "只讨论了对称轴在区间内的情形，遗漏 a≤0 与 a≥2 两种情况。",
+        "分类讨论不完整"
+      ),
+    ],
+    aiOverallComment: "对二次函数图像性质理解不够牢固，分类讨论意识薄弱。建议重做课本例 3 并完成变式训练 2 道。",
+    overallComment: "对二次函数图像性质理解不够牢固，分类讨论意识薄弱。建议重做课本例 3 并完成变式训练 2 道。",
+  },
+  {
+    id: "sub-03",
+    assignmentId: "hw-math-01",
+    studentName: "陈浩然",
+    studentNo: "20260305",
+    submittedAt: "2026-09-29 21:03",
+    source: "拍照上传",
+    status: "confirmed",
+    aiConfidence: 0.88,
+    grades: [
+      g("q1", "A", 5, "正确。"),
+      g("q2", "4；2", 10, "正确。"),
+      g(
+        "q3",
+        "任取 0<x₁<x₂<√2/2，f(x₁)-f(x₂)=(x₁-x₂)(2x₁x₂-1)/(x₁x₂)，x₁-x₂<0，2x₁x₂-1<0，所以 f(x₁)-f(x₂)>0。",
+        15,
+        "证明完整规范。"
+      ),
+      g("q4", "a≤0: 3；0<a<2: 3-a²；a≥2: 7-4a", 17, "结果正确，但缺少对称轴位置的文字说明，过程略简。", "过程书写简略"),
+    ],
+    aiOverallComment: "解题思路清晰，结果准确。解答题注意保留关键推理步骤。",
+    overallComment: "思路清晰！第 4 题下次把对称轴与区间位置关系写出来，会更完整。",
+  },
+  {
+    id: "sub-04",
+    assignmentId: "hw-math-01",
+    studentName: "赵一诺",
+    studentNo: "20260311",
+    submittedAt: "2026-09-29 21:37",
+    source: "拍照上传",
+    status: "pending_review",
+    aiConfidence: 0.84,
+    grades: [
+      g("q1", "A", 5, "正确。"),
+      g("q2", "最小值 2√2，x = √2", 0, "错误。误把 4/x 当作 2/x 计算，最小值应为 4。", "计算错误"),
+      g(
+        "q3",
+        "任取 0<x₁<x₂<√2/2，作差得 (x₁-x₂)(2-1/(x₁x₂))，x₁-x₂<0，0<x₁x₂<1/2，故 2-1/(x₁x₂)<0，所以 f(x₁)>f(x₂)，f(x) 在该区间单调递减。",
+        15,
+        "五步完整，定号理由充分，书写规范。"
+      ),
+      g("q4", "a≤0 时 g(a)=3；0<a<2 时 g(a)=3-a²；a≥2 时 g(a)=7-2a。", 16, "a≥2 时 f(2)=4-4a+3=7-4a，计算有误。", "计算错误"),
+    ],
+    aiOverallComment: "推理能力较强，但计算失误较多，建议养成代入检验的习惯。",
+    overallComment: "推理能力较强，但计算失误较多，建议养成代入检验的习惯。",
+  },
+  {
+    id: "sub-05",
+    assignmentId: "hw-math-01",
+    studentName: "刘子墨",
+    studentNo: "20260318",
+    submittedAt: "2026-09-29 21:58",
+    source: "在线提交",
+    status: "pending_review",
+    aiConfidence: 0.9,
+    grades: [
+      g("q1", "A", 5, "正确。"),
+      g("q2", "4，x=2", 10, "正确。"),
+      g("q3", "（未作答）", 0, "未作答。", "空题"),
+      g("q4", "对称轴 x=a，分 a≤0、0<a<2、a≥2 三种情况，分别为 3、3-a²、7-4a。", 20, "完整正确。"),
+    ],
+    aiOverallComment: "第 3 题未作答，请确认是否时间不足或对定义法证明存在困难。",
+    overallComment: "第 3 题未作答，请确认是否时间不足或对定义法证明存在困难。",
+  },
+  {
+    id: "sub-06",
+    assignmentId: "hw-phys-01",
+    studentName: "李思远",
+    studentNo: "20260301",
+    submittedAt: "2026-09-28 18:20",
+    source: "拍照上传",
+    status: "pending_review",
+    aiConfidence: 0.95,
+    grades: [
+      g("p1", "x = v₀t - ½at² = 60 - 36 = 24 m", 6, "未判断刹车时间，直接代入 6 s 导致错误。正确答案 25 m。", "刹车陷阱"),
+    ],
+    aiOverallComment: "注意刹车类问题先求停止时间。",
+    overallComment: "注意刹车类问题先求停止时间。",
+  },
+];
+
+// Answers the mock AI "reads" from a newly uploaded photo, cycled per upload
+export const MOCK_UPLOAD_STUDENTS = [
+  { studentName: "孙嘉怡", studentNo: "20260322" },
+  { studentName: "周明轩", studentNo: "20260327" },
+  { studentName: "吴若溪", studentNo: "20260331" },
 ];
