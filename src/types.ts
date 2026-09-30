@@ -159,3 +159,39 @@ export interface AIToolConfig {
   type: "question_generator" | "exam_review" | "difficulty_estimator" | "lesson_designer" | "student_diagnostic";
   icon: string;
 }
+
+export interface KnowledgePointStat {
+  name: string;
+  classMastery: number; // 0-100
+  gradeMastery: number; // 0-100
+}
+
+export interface StudentLearningProfile {
+  id: string;
+  name: string;
+  studentNo: string;
+  scores: number[]; // aligned with LearningClassProfile.exams
+  mastery: number[]; // aligned with LearningClassProfile.knowledgePoints
+}
+
+export interface PracticeSuggestion {
+  knowledgePoint: string;
+  title: string;
+  questionCount: number;
+  difficulty: "基础巩固" | "变式提升" | "综合拔高";
+  minutes: number;
+  focus: string;
+}
+
+export interface LearningClassProfile {
+  id: string;
+  name: string;
+  grade: string;
+  subject: string;
+  fullScore: number;
+  exams: string[];
+  classAvg: number[];
+  gradeAvg: number[];
+  knowledgePoints: KnowledgePointStat[];
+  students: StudentLearningProfile[];
+}
